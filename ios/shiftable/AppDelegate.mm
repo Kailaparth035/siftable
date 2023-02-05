@@ -1,5 +1,6 @@
 #import "AppDelegate.h"
-
+// Import RNSplashScreen
+#import "RNSplashScreen.h"
 #import <React/RCTBundleURLProvider.h>
 
 @implementation AppDelegate
@@ -7,6 +8,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   self.moduleName = @"shiftable";
+  // Set the splash screen to show by default.
+  [RNSplashScreen show];
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
