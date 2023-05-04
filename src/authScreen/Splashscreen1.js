@@ -3,7 +3,6 @@ import {
   View,
   Text,
   FlatList,
-  SafeAreaView,
   Image,
   StyleSheet,
   TouchableOpacity,
@@ -11,18 +10,17 @@ import {
 import {OnbordScreen} from '../theme/ConstantArray';
 import Colors from '../theme/Colors';
 import {Fonts, SIZES} from '../theme/index';
-import {horizontalScale, moderateScale} from '../theme/scalling';
+import {horizontalScale, moderateScale, verticalScale} from '../theme/scalling';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 const Splashscreen1 = ({navigation}) => {
   const [onbordScreen, setOnbordScreen] = useState(OnbordScreen);
   const [focusedIndex, setFocusedIndex] = useState(0);
   const onViewableItemsChanged = ({viewableItems}) => {
     // Do stuff
-    console.log('viewableItems ::', viewableItems);
     setFocusedIndex(viewableItems[0].index);
   };
-  console.log('focusedIndex', focusedIndex);
   const viewabilityConfig = {viewAreaCoveragePercentThreshold: 50};
   const viewabilityConfigCallbackPairs = useRef([
     {viewabilityConfig, onViewableItemsChanged},
@@ -33,18 +31,21 @@ const Splashscreen1 = ({navigation}) => {
         data={onbordScreen}
         pagingEnabled
         horizontal
-        contentContainerStyle={{height: SIZES.height}}
+        contentContainerStyle={{height: '100%'}}
         scrollEnabled={true}
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
         viewabilityConfigCallbackPairs={viewabilityConfigCallbackPairs.current}
         renderItem={({item, index}) => {
           return (
             <View style={styles.flatlist_container}>
-              <Image
-                source={item.image}
-                style={styles.onbord_image}
-                resizeMode={'contain'}
-              />
-
+              <View style={{height:'77%'}}>
+                <Image
+                  source={item.image}
+                  style={styles.onbord_image}
+                  resizeMode={'cover'}
+                />
+              </View>
               {index === 0 ? (
                 <>
                   <Text style={styles.text}>{item.text}</Text>
@@ -65,7 +66,7 @@ const Splashscreen1 = ({navigation}) => {
                   </Text>
                 </>
               ) : null}
-              <View style={{flex: 1}}></View>
+              {/* <View style={{flex: 1}}></View> */}
               <View style={styles.foote_view}>
                 <View style={styles.dooted_view}>
                   {OnbordScreen.map((mapItem, mapIndex) => {
@@ -153,18 +154,21 @@ const styles = StyleSheet.create({
   },
   onbord_image: {
     width: SIZES.width,
-    marginTop: -(SIZES.height / 16),
+    // width:'98%',
+    height: '100%',
+    // marginTop: -(SIZES.height / 16),
   },
   text: {
     color: Colors.text,
     fontFamily: Fonts.satoshi_medium,
-    fontSize: moderateScale(25),
+    marginTop: verticalScale(10),
+    fontSize: moderateScale(22),
     marginHorizontal: horizontalScale(25),
   },
   subText: {
     color: Colors.sky_color,
     fontFamily: Fonts.satoshi_bold,
-    fontSize: moderateScale(25),
+    fontSize: moderateScale(22),
     marginHorizontal: horizontalScale(25),
   },
   foote_view: {

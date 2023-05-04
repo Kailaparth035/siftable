@@ -113,4 +113,6 @@ export default Colors = {
   indigo,
   purple,
   pink,
+  lightblue: '#EBF3FE',
+  darkWhite: '#F9FAFF',
 };

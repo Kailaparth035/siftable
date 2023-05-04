@@ -11,9 +11,12 @@ const profileImage = require('../../assets/images/profileImage.png');
 const splashLogo = require('../../assets/images/splashLogo.png');
 const upperDesign = require('../../assets/images/upperDesign.png');
 const whiteLogo = require('../../assets/images/whitelogo.png');
+const BlackBackground = require('../../assets/images/BlackBackground.jpg');
+const extraImage = require('../../assets/images/extraImage.jpg');
+const dummy_profile = require('../../assets/images/dummy_profile.png');
+const splashscreen = require('../../assets/images/Splash.png');
 
 export const Images = {
-  // addImage,
   bellowDesign,
   cartoon,
   hospital,
@@ -26,4 +29,8 @@ export const Images = {
   splashLogo,
   upperDesign,
   whiteLogo,
+  BlackBackground,
+  extraImage,
+  dummy_profile,
+  splashscreen
 };

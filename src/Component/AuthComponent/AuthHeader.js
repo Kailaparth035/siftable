@@ -32,7 +32,10 @@ const AuthHeader = ({profileTextEnable, smallText, bigText}) => {
           </>
         ) : null}
       </View>
-      <Image source={Images.upperDesign} />
+      <Image
+        source={Images.upperDesign}
+        style={{marginTop: moderateScale(-25)}}
+      />
     </View>
   );
 };

@@ -1,5 +1,12 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Platform,
+} from 'react-native';
 import {Fonts} from '../../theme/index';
 import Colors from '../../theme/Colors';
 import {Icons} from '../../theme/icons';
@@ -10,12 +17,21 @@ import {
   verticalScale,
 } from '../../theme/scalling';
 
-const MainHeader = ({isShowLogo, text}) => {
+const MainHeader = ({isShowLogo, text, bellAction, openProfile}) => {
   return (
     <View
       style={[
         styles.container,
-        {height: isShowLogo ? moderateScale(80) : moderateScale(80)},
+        {
+          height: isShowLogo
+            ? Platform.OS === 'ios'
+              ? moderateScale(100)
+              : moderateScale(60)
+            : Platform.OS === 'ios'
+            ? moderateScale(100)
+            : moderateScale(60),
+          paddingTop: Platform.OS === 'ios' ? moderateScale(30) : 0,
+        },
       ]}>
       <View style={styles.logo_container}>
         {isShowLogo ? (
@@ -25,13 +41,18 @@ const MainHeader = ({isShowLogo, text}) => {
         )}
       </View>
       <View style={styles.secondary_container}>
-        <Image source={Icons.bell} />
-        <View>
+        <TouchableOpacity onPress={bellAction}>
+          <Image
+            source={Icons.bell}
+            style={{width: moderateScale(19.19), height: moderateScale(21.65)}}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={openProfile}>
           <Image
             source={Images.profileImage}
             style={{width: moderateScale(42), height: moderateScale(42)}}
           />
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -57,7 +78,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: Fonts.satoshi_bold,
-    fontSize: moderateScale(22),
+    fontSize: moderateScale(20),
     color: Colors.white,
   },
 });
